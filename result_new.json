@@ -94,19 +94,7 @@
     "https://www.auhs.edu/media/admissions/forms/mscr/mscr_pre_req.pdf",
     "https://www.auhs.edu/media/admissions/forms/mscr/mscr_student_agreement.pdf"
   ],
-  "https://www.auhs.edu/academics/auhs-catalog/": [ //Khong hien thi page
-    "https://www.auhs.edu/wp-content/uploads/2024/06/AUHS-University-Catalog-2023-2024-6.13.24.pdf",
-    "https://www.auhs.edu/wp-content/uploads/2022/10/University-Catalog-2022-2023.pdf",
-    "https://www.auhs.edu/wp-content/uploads/2022/06/AUHS-University-Catalog-Sep-2021-Aug-2022.6622.pdf",
-    "https://www.auhs.edu/wp-content/uploads/2021/11/2020-2021-University-Catalog.Rev_.07.22.2020-Final.pdf",
-    "https://www.auhs.edu/files/19-20-catalog.pdf",
-    "https://www.auhs.edu/files/18-19-catalog.pdf",
-    "https://www.auhs.edu/files/2017-2018-University%20Catalog.Rev.07.09.18.pdf",
-    "https://www.auhs.edu/files/2016-2017%20University%20Catalog.09.27.pdf",
-    "https://www.auhs.edu/files/2014-2015.AUHS.Catalog.Final.03.20.15.pdf",
-    "https://www.auhs.edu/files/2013-2014.University.Catalog.11.03.pdf",
-    "https://www.auhs.edu/files/2012-2013.University.Catalog%2008.23.pdf"
-  ],
+
   "https://www.auhs.edu/academics/pharmacy/bs-pharmaceutical-sciences/": [ //Khong hien thi page
     "https://www.auhs.edu/media/admissions/forms/bsps/bsps_application%20checklist_hs.pdf",
     "https://www.auhs.edu/media/admissions/forms/bsps/bsps_ge_transferable.pdf",
@@ -136,24 +124,6 @@
     "https://www.auhs.edu/wp-content/uploads/2022/08/AUHS-Website-Privacy-Notice.pdf",
     "https://www.auhs.edu/wp-content/uploads/2024/07/DEI-Approved-Policy.pdf"
   ],
-  "https://www.auhs.edu/about/accreditations/": [ //Khong hien thi page
-    "https://www.auhs.edu/files/AUHS-Team.Report.SV.fall.2019.pdf",
-    "https://www.auhs.edu/files/CAL_200226_AUHS_SV.pdf",
-    "https://www.auhs.edu/files/CAL_170623_AUHS.pdf",
-    "https://www.auhs.edu/files/auhs-team-report-spring-2017.pdf",
-    "https://www.auhs.edu/files/CCNE-Approval-Letter.pdf",
-    "https://www.auhs.edu/wp-content/uploads/2021/11/2021_11_BAL_C_AUHS_CA.pdf",
-    "https://www.auhs.edu/wp-content/uploads/2021/11/2021_11_BAL_M_AUHS_CA.pdf"
-  ],
-  "https://www.auhs.edu/articles/telehealth-activities-in-the-school-of-pharmacy/": [ //Khong hien thi page
-    "http://www.ed.gov/rschstat/eval/tech/evidence-based-practices/finalreport.pdf"
-  ],
-  "https://www.auhs.edu/articles/10-things-know-sexual-assault/": [ //Khong hien thi page
-    "https://www.cdc.gov/violenceprevention/pdf/sv-datasheet-a.pdf"
-  ],
-  "https://www.auhs.edu/press-releases/auhs-first-bi-annual-employer-panel/": [ //Khong hien thi page
-    "https://www.auhs.edu/wp-content/uploads/2017/03/EmployerPanelMarch2017updated.pdf"
-  ],
 
   "https://www.auhs.edu/campus/student-services/academic-calendar/": [ //Khong hien thi page
     "https://www.auhs.edu/wp-content/uploads/2023/05/AUHS-Academic-Calendar-2023-2024-updated-052223.pdf",
@@ -171,10 +141,6 @@
   "https://www.auhs.edu/community/community-engagement/": [ //Da xong
     "https://www.auhs.edu/media/resources/community_service/comm_service_hour.pdf",
     "https://www.auhs.edu/media/resources/community_service/requirement_request.pdf"
-  ],
-  "https://www.auhs.edu/about/auhs-privacy-policy/": [ //Khong dong nhat giao dien
-    "https://www.auhs.edu/wp-content/uploads/2022/08/AUHS-Website-Privacy-Notice.pdf",
-    "https://www.auhs.edu/wp-content/uploads/2024/07/DEI-Approved-Policy.pdf"
   ],
 
   "https://www.auhs.edu/resources/financial-aid/irs/": [ //Khong hien thi page

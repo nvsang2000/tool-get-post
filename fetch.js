@@ -4,7 +4,7 @@ const xlsx = require('xlsx');
 (async () => {
     let posts = [];
 
-    for (let index = 1; index <= 2; index++) {
+    for (let index = 1; index <= 69; index++) {
         console.log("page", index);
         let url = `https://news.auhs.edu/page/${index}`;
         
@@ -45,6 +45,20 @@ const xlsx = require('xlsx');
             }
         }
     }
+
+    // Save posts data to an Excel file
+    let workbook = xlsx.utils.book_new();
+    let worksheetData = posts.map(post => ({
+        'Title': post.title,
+        'Link': post.link,
+        'Thumnail': post.image,
+        'Category': post.category,
+        'Time publish': post.time,
+        'Content': post.content
+    }));
+    let worksheet = xlsx.utils.json_to_sheet(worksheetData);
+    xlsx.utils.book_append_sheet(workbook, worksheet, 'Posts');
+    xlsx.writeFile(workbook, 'posts_new_1.csv');
 
     console.log('Quá trình quét và cập nhật hoàn tất.');
 })();

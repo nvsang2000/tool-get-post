@@ -7,13 +7,9 @@ const path = require('path');
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
 
-    // Tạo thư mục để lưu ảnh nếu chưa có
-    const imageDir = path.join(__dirname, 'images');
-    fs.ensureDirSync(imageDir);
-
-    for (let index = 10; index <= 20; index++) {
+    for (let index = 1; index <= 69; index++) {
         console.log(" page", index);
-        let url = `https://news.auhs.edu/page/${index}`
+        let url = `https://news.auhs.edu/page/${index}`;
         // Điều hướng đến trang hiện tại
         await page.goto(url, { waitUntil: 'load', timeout: 0 });
 
@@ -23,20 +19,31 @@ const path = require('path');
                 let title = post.querySelector('.post-header .title').innerText;
                 let link = post.querySelector('.img-link').href;
                 let category = post.querySelector('.meta-category a').textContent;
-                let time =  post.querySelector('.post-header span').textContent;
+                let time = post.querySelector('.post-header span').textContent;
                 let image = post.querySelector('.post-featured-img img') ? post.querySelector('img').src : null;
                 return { title, link, image, time, category };
             });
         });
 
         console.log("postsOnPage: ", postsOnPage);
+
         // Tải ảnh nếu có và lưu thông tin vào mảng posts
         for (let post of postsOnPage) {
             if (post.image) {
+                // Lấy đường dẫn thư mục từ URL của ảnh
+                const imageDirPath = new URL(post.image).pathname.split('/').slice(1, -1).join('/');
+                const imageDirFullPath = path.join(__dirname, imageDirPath);
+                
+                // Đảm bảo rằng thư mục tồn tại
+                fs.ensureDirSync(imageDirFullPath);
+
+                // Lấy tên file ảnh từ URL
                 let imageFileName = path.basename(post.image);
-                let imageFilePath = path.join(imageDir, imageFileName);
+                let imageFilePath = path.join(imageDirFullPath, imageFileName);
+
+                // Tải và lưu ảnh
                 const viewSource = await page.goto(post.image);
-                console.log("ddowwnload: ", imageFilePath);
+                console.log("Downloading: ", imageFilePath);
                 fs.writeFileSync(imageFilePath, await viewSource.buffer());
             }
 
@@ -47,7 +54,7 @@ const path = require('path');
             });
 
             // Tìm và tải xuống tất cả các hình ảnh trong nội dung bài viết
-            post.content = await page.evaluate(async (imageDir) => {
+            post.content = await page.evaluate(async () => {
                 const images = document.querySelectorAll('.post-content .content-inner img');
                 const downloadedImages = [];
 
@@ -58,13 +65,23 @@ const path = require('path');
                 }
 
                 return { htmlContent: document.querySelector('.post-content .content-inner').outerHTML, downloadedImages };
-            }, imageDir);
+            });
 
             // Tải xuống tất cả các hình ảnh đã được tìm thấy
             for (let img of post.content.downloadedImages) {
-                const imageFilePath = path.join(imageDir, img.imageFileName);
+                // Lấy đường dẫn thư mục từ URL của ảnh
+                const imageDirPath = new URL(img.imageUrl).pathname.split('/').slice(1, -1).join('/');
+                const imageDirFullPath = path.join(__dirname, imageDirPath);
+
+                // Đảm bảo rằng thư mục tồn tại
+                fs.ensureDirSync(imageDirFullPath);
+
+                // Lấy tên file ảnh từ URL
+                const imageFilePath = path.join(imageDirFullPath, img.imageFileName);
+
+                // Tải và lưu ảnh
                 const viewSource = await page.goto(img.imageUrl);
-                console.log("ddowwnload: ", imageFilePath);
+                console.log("Downloading: ", imageFilePath);
                 fs.writeFileSync(imageFilePath, await viewSource.buffer());
             }
         }
