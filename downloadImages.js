@@ -3,7 +3,7 @@ const axios = require('axios');
 const path = require('path');
 
 // Đọc file JSON chứa srcset
-const srcsetList = JSON.parse(fs.readFileSync('cleanedUrls.json', 'utf-8'));
+const srcsetList = JSON.parse(fs.readFileSync('urlList.json', 'utf-8'));
 console.log("srcsetList", srcsetList)
 
 // Hàm tải ảnh từ URL và lưu vào thư mục tương ứng
