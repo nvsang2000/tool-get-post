@@ -99,8 +99,8 @@ function addLineBreakForChineseInBrackets(text) {
           .filter((line) => line.trim() !== "");
         const processedText = lines.join(" ");
 
-        const minChars = 3500;
-        const maxChars = 4000;
+        const minChars = 2500;
+        const maxChars = 3000;
         let resultArray = [];
         let currentText = "";
         let currentLength = 0;
