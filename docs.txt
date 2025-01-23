@@ -1,37 +1,6 @@
 sudo apt-get remove --auto-remove grass-gui
 
 bowerbird
-
-
-Dạ EM report công việc.
---------
-Dự án chatbot AI
-- Triển khai xây dựng model Chatbot, dataset.
-* Model Chatbot: 
- 	- Sẽ thực hiện công việc quản lí config cơ bản cho giao diện chatbot, như title, ảnh, giao diện.
- 	- Xuất ra script để nhúng vô site khác.
-* Model Dataset: Sẽ lưu lại các Nội dung cung cấp cho model AI
-	- Ngữ cảnh hệ thống: AI dựa vào ngữ cảnh cung cấp để trả lời liên quan đế hệ thống.
-	- Các câu hỏi gợi ý ban đầu.
-	- Tập dữ liệu traning.
-- Thiết kế giao diện
-
-----------
-Dự án làm auto xử lí dữ liệu và render audio.
-Phần này thì em có thấy Anh An nói. Theo em thì sẽ triển khai như vầy.
-
-- Phần lấy dữ liệu em sẽ làm tool để lấy dữ liệu lưu lại docs
-- Sử dụng model AI đang có hiện tại trên máy để thực hiện xử lí dữ liệu. Model AI có thể nhận diện được các từ viết tắt cơ bản, sau khi lấy được dữ liệu ta sẽ đưa dữ liệu docs cho model đọc và trích ra những từ viết tắt từ AI.
-- Phần render audio trên site naturalreaders thì em ko thấy họ publish API ra ngoài, em thấy có thể mô phỏng được cách họ call api và truyền theo đúng mãu thì có thể thực hiện được auto render audio. Phần này thì hơi khó nên củng sẽ mất thời gian nhiều.
-
-------------
-Dạ em gửi lại thông tin. 
---------------
-Nguyễn Văn Sang
-Vietcombank: 1043800019
-Chi nhánh: PGD Tân Sơn Nhì
-Ngân hàng TMCP Ngoại thương Việt Nam (Vietcombank)
-
 --------------------
 
 *
