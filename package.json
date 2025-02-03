@@ -24,6 +24,7 @@
     "pdf-parse": "^1.1.1",
     "puppeteer": "^23.0.2",
     "puppeteer-extra": "^3.3.6",
+    "slug": "^10.0.0",
     "spellchecker": "^3.7.1",
     "typo-js": "^1.2.5",
     "url": "^0.11.4",

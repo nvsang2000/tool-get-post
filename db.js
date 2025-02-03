@@ -55,7 +55,7 @@ async function getPostsInRange(pool, startId, endId) {
       LEFT JOIN vnvn_object o ON p.post_id = o.object_id
       LEFT JOIN vnvn_postdata pd ON p.post_id = pd.postdata_postid  -- Thêm join với bảng vnvn_postdata
       WHERE p.post_id BETWEEN @startId AND @endId
-        AND p.post_isActive = 1
+        AND p.post_isActive = 1 AND p.post_style = 'post'
       ORDER BY p.post_id DESC
     `;
     

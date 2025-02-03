@@ -3,10 +3,12 @@ import path from "path";
 
 const contentSystem = `
 Hãy kiểm tra các từ viết tắt và liệt kê ra khi người dùng gửi yêu cầu: 
-Hãy luôn tuân thủ quy tắc sau: 
-- Luôn trả lời theo Form: "Từ viết tắt" : "Nghĩa theo AI".
-- Có thể tìm các từ viết tắt không có trong ví dụ tôi đưa ra.
-- Ví dụ: "TS." : "Tiến Sĩ", "GHPGVN" : "Gia Hội Phật Giáo Việt Nam", "HT." : "Hòa thượng", "TT." : "Trụ trì", "AL": "Âm lịch" . "NXB": "Nhà Xuất Bản"          
+- Ví dụ các từ viết tắt như: 
+"TS." : "Tiến Sĩ", 
+"GHPGVN" : "Gia Hội Phật Giáo Việt Nam", 
+"HT." : "Hòa thượng", "TT." : "Trụ trì", 
+"AL": "Âm lịch",
+"NXB": "Nhà Xuất Bản"  ...       
 `;
 
 function readQuestionsFromFile(filePath) {
@@ -82,7 +84,7 @@ function traverseDirectory(directoryPath, fileList = []) {
 
 (async () => {
   try {
-    const directoryPath = "./Content_Blog";
+    const directoryPath = "./Post_Content";
     const txtFiles = traverseDirectory(directoryPath, []);
     
     for (const filePath of txtFiles) {

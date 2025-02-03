@@ -1,6 +1,7 @@
 const cheerio = require("cheerio");
 const fs = require("fs");
 const path = require("path");
+const slug = require("slug").default;
 const { connectDB, getPostsInRange } = require("./db");
 
 function formatDate(dateString) {
@@ -10,9 +11,8 @@ function formatDate(dateString) {
   if (match) {
     const day = match[1];
     const month = match[2];
-    const year = match[3] 
+    const year = match[3];
     const date = ` ${day}, tháng ${month}, năm ${year} `;
-
     return date;
   } else {
     return dateString;
@@ -30,11 +30,38 @@ function addLineBreakForChineseInBrackets(text) {
   return text.replace(regex, (match) => `\n${match.trim()}\n`);
 }
 
+function insertBreaks(text, minWords = 300, maxWords = 350) {
+  const words = text.split(" "); // Tách văn bản thành mảng các từ
+  let result = "";
+  let wordCount = 0;
+
+  for (let i = 0; i < words.length; i++) {
+    result += words[i] + " "; // Thêm từ vào kết quả
+    wordCount++;
+
+    // Kiểm tra số từ và dấu chấm
+    if (
+      wordCount >= minWords &&
+      wordCount <= maxWords &&
+      words[i].endsWith(".")
+    ) {
+      result += "<break time='1000ms'/> ";
+      wordCount = 0;
+    }
+  }
+
+  return result;
+}
+
+const abbreviationRegex = /(?:\s)([A-Z]{2,})(?=\s|[.:/,-])(?=\s|$)/g;
+
 (async () => {
   try {
     const pool = await connectDB();
-    const posts = await getPostsInRange(pool, 41000, 42119);
+    const posts = await getPostsInRange(pool, 139, 42119);
     const replacements = await loadReplacements();
+
+    const abbreviationMap = new Map(); // 🔹 Định nghĩa abbreviationMap ở đây
 
     for (const post of posts) {
       const {
@@ -44,11 +71,16 @@ function addLineBreakForChineseInBrackets(text) {
         post_sqlmonth,
         post_sqlday,
         object_name,
+        post_style,
+        post_isBook,
         postdata_contentHTML,
       } = post;
 
+      console.log("Processing posts...", post_id, post_style, post_isBook);
+
       let cleanedText = "";
-      let fileName = `${post_title}.txt`;
+      // Giới hạn độ dài title và chuyển thành slug
+      let fileName = `[${post_id}]_${slug(post_title).slice(0, 200)}.txt`; // Giới hạn tên file ở 150 ký tự
       const pdfLinks = [];
       const url = `https://thuvienhoasen.org/a${post_id}/${object_name}`;
 
@@ -78,8 +110,20 @@ function addLineBreakForChineseInBrackets(text) {
         });
 
         cleanedText = $.text().trim();
+
+        const matches = cleanedText.match(abbreviationRegex);
+        if (matches) {
+          console.log("Found abbreviations:", matches);
+          const uniqueAbbreviations = [
+            ...new Set(matches.map((match) => match.trim())),
+          ];
+          abbreviationMap.set(post_id, uniqueAbbreviations);
+        }
+        // Trong phần xử lý văn bản
+        cleanedText = insertBreaks(cleanedText);
         cleanedText = cleanedText.replace(/([^.])$/, "$1.");
         cleanedText = cleanedText.replace(/\[\d+\]/g, "");
+        cleanedText = cleanedText.replace(/\*/g, "");
         cleanedText = cleanedText.replace("(trích đoạn)", "");
         cleanedText = cleanedText.replace(
           /(\d{1,2})[-\/](\d{1,2})(?:[-\/](\d{4}))?/g,
@@ -151,14 +195,14 @@ function addLineBreakForChineseInBrackets(text) {
         cleanedText = resultArray.join("\n\n");
       } catch (error) {
         console.error(`Error processing post ${post_id}:`, error.message);
-        fileName = `[${post_id}]_[FAILD]_${post_title}.txt`;
+        fileName = `[FAILD]_${slug(post_title).slice(0, 150)}.txt`; // Nếu lỗi, sử dụng slug
         cleanedText = "Không thể xử lý HTML.";
       }
 
       const fileContent = `${url}\n\n${cleanedText}`;
       const dateFolder = path.join(
         __dirname,
-        "Content_Blog",
+        "Post_Content",
         `${post_sqlyear}`,
         `${post_sqlmonth.toString().padStart(2, "0")}`,
         `${post_sqlday.toString().padStart(2, "0")}`
@@ -168,12 +212,17 @@ function addLineBreakForChineseInBrackets(text) {
         fs.mkdirSync(dateFolder, { recursive: true });
       }
 
-      const finalFileName = `[${post_id}]_${
-        pdfLinks.length > 0 ? "[Có PDF]_" : ""
-      }${fileName}`;
-      const filePath = path.join(dateFolder, finalFileName);
+      const filePath = path.join(dateFolder, fileName);
       fs.writeFileSync(filePath, fileContent, "utf8");
     }
+
+    const abbreviationText = Array.from(abbreviationMap)
+      .map(
+        ([postId, abbreviations]) => `${postId} : ${abbreviations.join(", ")}`
+      )
+      .join("\n");
+
+    fs.writeFileSync("abbreviations.txt", abbreviationText, "utf8");
     console.log("Done!");
   } catch (error) {
     console.error("Error:", error);

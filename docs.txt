@@ -1,5 +1,11 @@
 sudo apt-get remove --auto-remove grass-gui
 
+---------
+python3 --version  # Kiểm tra Python
+python3 -m venv --help  # Kiểm tra venv
+
+---------
+
 bowerbird
 --------------------
 
@@ -32,4 +38,14 @@ Nhấn mạnh từ: <emphasis level='strong'>Dharma Rain</emphasis>
 Bỏ qua từ: <sub alias=''>chấm vô</sub>
 
 -----------
-tìm các bài nằm trong 1 book. truy cập bảng vnvn_postbook . tìm bài post_id trùng nhau
+tìm các bài nằm trong 1 book. truy cập bảng vnvn_postbook . tìm bài post_id trùng nhau.
+
+------------
+Sau khoản 300-350 từ thấy có xuống hàng trong bài thì chỗ đó cho break time.
+Chương trình này không phải tin tức nên không cần nhanh người nghe cần chút thời gian để thấm, thường người nghe lớn tuổi nên chậm chút OK hơn.
+--------
+
+Các thẻ chỉnh giọng trong naturalreaders:
+Chờ một khoảng thời gian: <break time='1000ms'/>
+Nhấn mạnh từ: <emphasis level='strong'>Dharma Rain</emphasis>
+Bỏ qua từ: <sub alias=''>truy cập</sub>
